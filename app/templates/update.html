@@ -1,0 +1,50 @@
+{% extends 'components/layout.html' %}
+{% block content %}
+{% if name %}
+    <h1 style="font-family: 'Dancing Script', cursive; color: #007bff;">User Updated Successfully!</h1>
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <td>{{ name_to_update.id }}. {{ name_to_update.name }} - {{ name_to_update.email }}</td>
+        </tr>
+    </table>
+{% else %}
+    <br>
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <h1>Update User!</h1>
+        <form action="{{ url_for('auth.update', id=name_to_update.id) }}" method="post">
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control", value=name_to_update.name) }}<br>
+
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", value=name_to_update.email) }}<br>
+
+            {{ form.color.label(class="form-label") }}
+            {{ form.color(class="form-control", value=name_to_update.color) }}<br>
+
+            {{ form.submit(class="btn btn-primary") }}
+
+            <!-- Кнопка для возврата на страницу добавления пользователя -->
+            <a href="{{ url_for('auth.add_user') }}" class="btn btn-primary btn-success">← Go back</a>
+            <!-- Кнопка для удаления пользователя -->
+        </form>
+    </div>
+{% endif %}
+{% if request.method == 'POST' %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    Swal.fire({
+                        icon: '{{ category }}',
+                        title: '{{ message }}',
+                        showConfirmButton: true,
+                    });
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+{% endif %}
+{% endblock %}

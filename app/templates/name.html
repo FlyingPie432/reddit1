@@ -1,0 +1,35 @@
+{% extends 'components/layout.html' %}
+
+{% block content %}
+<br>
+{% if request.method == 'POST' %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    Swal.fire({
+                        icon: '{{ category }}',
+                        title: '{{ message }}',
+                        showConfirmButton: true,
+                    });
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+{% endif %}
+
+{% if name %}
+    <h1>Hello {{ name }}</h1>
+{% else %}
+    <h1>What's your name?</h1><br>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control") }}<br>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}

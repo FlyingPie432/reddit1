@@ -1,0 +1,51 @@
+{% extends 'components/layout.html' %}
+{% block content %}
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <h1>User List: </h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}<br>
+
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}<br>
+
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}<br>
+
+            {{ form.color.label(class="form-label") }}
+            {{ form.color(class="form-control") }}<br>
+
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+
+    </div>
+    <table class="table table-hover table-bordered table-striped">
+    {% for our_user in our_users %}
+            <tr>
+            <td>{{ our_user.id }}. <a href="{{ url_for('auth.update', id=our_user.id) }}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.color }}
+                <a href="{{ url_for('auth.delete', id=our_user.id) }}">Delete</a>
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+
+{% if request.method == 'POST' %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    Swal.fire({
+                        icon: '{{ category }}',
+                        title: '{{ message }}',
+                        showConfirmButton: true,
+                    });
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+{% endif %}
+{% endblock %}
