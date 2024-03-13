@@ -14,6 +14,4 @@ def name_form():
     return render_template('name.html', form=form, name=name, title='Name')
 
 
-@base_bp.route('/register', methods=["GET", "POST"])
-def register():
-    pass
+
