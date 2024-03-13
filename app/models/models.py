@@ -20,13 +20,14 @@ class User(db.Model):
         db.session.commit()
 
 
-class Post(db.Model):
+class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     author = db.Column(db.String(255))
     content = db.Column(db.String)
     slug = db.Column(db.String)
     submit= db.Column(db.String)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow())
 
     def save_db(self):
         db.session.add(self)

@@ -23,8 +23,12 @@
                     <a class="nav-link mx-2" href="{{ url_for('base.name_form') }}">Name</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="#">Posts</a>
+                    <a class="nav-link mx-2" href="{{ url_for('base.add_post') }}">Add Post</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="{{ url_for('base.post_page') }}">Posts</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="{{ url_for('auth.add_user') }}">Add User</a>
                 </li>
