@@ -8,6 +8,9 @@
       <hr>
       {{ post.content }}<br><br>
       <br>
+      <a href="{{ url_for('base.post', id=post.id) }}" class="btn btn-outline-secondary btn-sm">View page</a>
+      <a href="{{ url_for('base.edit_post', id=post.id) }}" class="btn btn-outline-dark btn-sm">Edit page</a>
+      <a href="{{ url_for('base.delete_post', id=post.id) }}" class="btn btn-outline-danger btn-sm">Delete page</a>
       </div><br>
    {% endfor %}
 {% endblock %}

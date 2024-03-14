@@ -10,7 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(120), nullable=False, unique=True)
     color = db.Column(db.String(120))
     password_hash = db.Column(db.String(120), nullable=False)
-    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow())
 
     def __repr__(self):
         return f'<Name {self.name}>'
